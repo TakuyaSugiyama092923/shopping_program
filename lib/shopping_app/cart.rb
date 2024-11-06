@@ -26,10 +26,12 @@ class Cart
   def check_out
     return if owner.wallet.balance < total_amount
     @items.each do |item|
-      item.owner = owner
+      
       item_price = item.price
       owner.wallet.withdraw(item_price)
       item.owner.wallet.deposit(item_price)
+
+    　item.owner = owner
     end
 
     @items.clear
